@@ -32,7 +32,7 @@ export default function Product() {
         {product.map((product) => (
           <div className="card" key={product.id}>
             <div className="imageContainer">
-            <NavLink to={`/product/${product.id}`}><img
+            <NavLink to={`/product/${product.id}`} key={product.id}><img
                 src={require(`../img/${product.image}`)}
                 width="100"
                 height="100"
