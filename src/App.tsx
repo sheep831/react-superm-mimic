@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, useParams } from "react-router-dom";
 import {
   Logo,
   LinkDiv,
@@ -20,9 +20,14 @@ import NotFound from "./pages/NotFound";
 import { useSelector } from "react-redux";
 import { ProductState } from "./redux/reducer";
 import { RootState } from "./store";
+import productsData from "./data";
 
 function App() {
   const numberOfItemsInCart = useSelector((state:RootState) => state.product.length);
+  const params = useParams<{ id: string }>();
+  let id = parseInt(params.id!);
+  const data = productsData();
+  const product = data.find((product) => product.id == id);
 
   return (
     <>
@@ -49,13 +54,11 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="about" element={<AboutUs />} />
-        {/* <Route path="pd" element={<ProductDetails />} /> */}
-        <Route path="product" element={<Product />} >
-          <Route path=":id" element={<ProductDetails />} />
-            {/* <Route path="nutrition" element={<ProductNutrition />} />
+        <Route path="product" element={<Product />} />
+          <Route path="product/:id" element={<ProductDetails />} >
+            <Route path="nutrition" element={<ProductNutrition />} />
             <Route path="storage" element={<ProductStorage />} />
-          </Route> */}
-        </Route>
+          </Route>
         <Route path="cart" element={<Cart />} />
       </Routes>
     </>

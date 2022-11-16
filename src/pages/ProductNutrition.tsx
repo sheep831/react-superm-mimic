@@ -1,6 +1,9 @@
-import React from 'react'
+import React from "react";
+import { useOutletContext } from "react-router-dom";
 
 export default function ProductNutrition() {
+  const context: any = useOutletContext();
+
   return (
     <table>
       <thead>
@@ -10,9 +13,8 @@ export default function ProductNutrition() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          </tr>
-          </tbody>
+        <tr></tr>
+      </tbody>
     </table>
-  )
+  );
 }

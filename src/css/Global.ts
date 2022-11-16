@@ -17,6 +17,20 @@ const GlobalStyle = createGlobalStyle`
     display:block;
   }
 
+  h2 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  ul {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+
   .grid {
     grid-gap: 20px;
     display: grid;

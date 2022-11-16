@@ -1,34 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import productsData from "../data";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
+import { ProductButton } from "../css/HomeStyle";
+import { Container } from "../css/ProductDetails";
+import ProductRealDetails from "./ProductRealDetails";
 
 export default function ProductDetails() {
   const params = useParams<{ id: string }>();
-  //params.id
-  let id = 2;
+  let id = parseInt(params.id!);
   const data = productsData();
-  const product = data.find((product) => product.id === id);
+  const product = data.find((product) => product.id == id);
+  const [showDetails, setShowDetails] = useState(false);
+
+
+  function closeDetails() {
+    setShowDetails(false);
+  }
 
   return (
-    <div>
-      <div className="image-holder">
-        <h2>{product!.name}</h2>
-        <img
-          src={require(`../img/${product!.image}`)}
-          width="100"
-          height="100"
-        />
-      </div>
-      <div>
+    <Container>
+      <div className="product-details-layout">
+        <div className="image-holder">
+          <h2>{product!.name}</h2>
+          <img
+            className="product-details-image"
+            src={require(`../img/${product!.image}`)}
+            width="125"
+            height="125"
+          />
+        </div>
         <div>
-          <ul>
-            <li><NavLink to="/products/${product.id}">Details</NavLink></li>
-            <li><NavLink to="/products/${product.id}/nutrition">Nutrition</NavLink></li>
-            <li><NavLink to="/products/${product.id/storage">Storage</NavLink></li>
-          </ul>
+          <div className="tabs">
+            <ul>
+              <li onClick={() => setShowDetails(true)}>
+                <NavLink to={`/product/${product!.id}`}>Details</NavLink>
+              </li>
+              <li onClick={closeDetails}>
+                <NavLink to={`/product/${product!.id}/nutrition`}>
+                  Nutrition
+                </NavLink>
+              </li>
+              <li onClick={closeDetails}>
+                <NavLink to={`/product/${product!.id}/storage`}>
+                  Storage
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+          {showDetails && (
+            <ProductRealDetails
+              price={product!.price}
+              detail={product!.detail}
+            />
+          )}
+          <Outlet
+            context={{
+              storage: product?.storage,
+              nutrition: product?.nutrition,
+            }}
+          />
         </div>
       </div>
-    
-    </div>
+    </Container>
   );
 }
