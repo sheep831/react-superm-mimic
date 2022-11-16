@@ -1,11 +1,13 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import { NutritionTable } from "../css/Nutrition";
 
 export default function ProductNutrition() {
   const context: any = useOutletContext();
+  let nutrition = context.nutrition;
 
   return (
-    <table>
+    <NutritionTable>
       <thead>
         <tr>
           <th>Nutrient</th>
@@ -13,8 +15,14 @@ export default function ProductNutrition() {
         </tr>
       </thead>
       <tbody>
-        <tr></tr>
+        {Object.keys(nutrition).map((product: any) => (
+          <tr>
+            <td>{product}</td>
+            <td>{nutrition[product]}g</td>
+          </tr>
+        ))}
+        
       </tbody>
-    </table>
+    </NutritionTable>
   );
 }

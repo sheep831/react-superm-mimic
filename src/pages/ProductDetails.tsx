@@ -12,7 +12,6 @@ export default function ProductDetails() {
   const product = data.find((product) => product.id == id);
   const [showDetails, setShowDetails] = useState(false);
 
-
   function closeDetails() {
     setShowDetails(false);
   }

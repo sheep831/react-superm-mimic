@@ -2,10 +2,14 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 :root {
-    --theme-color: rgb(69   129	121	);
+    --theme-color: rgb(69 129	121);
     --theme-color-light: #00b99f;
     --bkg-color: rgb(241 236 238);
 }
+
+  thead {
+    background-color: var(--theme-color);
+  }
 
   body {
     background: var(--bkg-color);

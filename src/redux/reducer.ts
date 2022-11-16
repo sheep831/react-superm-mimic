@@ -8,7 +8,19 @@ export interface ProductState {
     image: string;
 }
 
-const defaultState: ProductState[] = []
+const defaultState: ProductState[] = [{
+    id: 1,
+    name: "cheese",
+    price: 10,
+    quantity: 5,
+    image: "cheese.png",
+}, {
+    id: 2,
+    name: "Milk",
+    price: 5,
+    quantity: 5,
+    image: "milk.png",
+}]
 
 export function productReducer(state = defaultState, action: ProductAction):ProductState[] {
     if (action.type === 'ADD_TO_CART') {

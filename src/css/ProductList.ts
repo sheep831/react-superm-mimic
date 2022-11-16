@@ -15,8 +15,8 @@ export const Outside = styled.div`
   }
 
   .card {
-    &:hover .imageContainer{
-        transform: scale(1.01) rotate(-2deg);
+    &:hover .imageContainer {
+      transform: scale(1.01) rotate(-2deg);
     }
     background: #fff;
     border-radius: 25px;
@@ -39,6 +39,24 @@ export const Outside = styled.div`
       font-size: 18px;
       line-height: 30px;
     }
+    .product-quantity-container {
+      background-color: #fff;
+      border-radius: 50%;
+      padding: 5px;
+      position: absolute;
+      right: -15px;
+      top: 8px;
+    }
+    .product-quantity {
+      background-color: #2b8379;
+      border-radius: 50%;
+      color: #fff;
+      display: grid;
+      font-size: 14px;
+      height: 23px;
+      place-items: center;
+      width: 23px;
+    }
   }
 
   .product-checkout {
@@ -46,6 +64,31 @@ export const Outside = styled.div`
     grid-template-rows: 1fr auto;
     justify-items: end;
     align-items: flex-end;
+    position: relative;
+
+    .product-delete {
+      background-color: #fff;
+      border-color: #c43464;
+      color: #970e3d;
+      font-size: 14px;
+      padding: 5px 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .btn-out {
+      border: 2px solid #c43464;
+      border-radius: 10px;
+      box-shadow: 1px 1px 7px #c4c4c4;
+      font-weight: bold;
+
+      &:hover {
+        background-color: #19a596;
+        color: #fff;
+        text-decoration: none;
+      }
+    }
   }
 
   .product-info {

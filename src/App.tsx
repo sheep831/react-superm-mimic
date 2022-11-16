@@ -27,7 +27,6 @@ function App() {
   const params = useParams<{ id: string }>();
   let id = parseInt(params.id!);
   const data = productsData();
-  const product = data.find((product) => product.id == id);
 
   return (
     <>
