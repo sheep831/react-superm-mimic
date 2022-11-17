@@ -48,8 +48,7 @@ export default function ProductDetails() {
           </div>
           {showDetails && (
             <ProductRealDetails
-              price={product!.price}
-              detail={product!.detail}
+              product={product!}
             />
           )}
           <Outlet

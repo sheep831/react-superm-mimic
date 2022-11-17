@@ -8,50 +8,41 @@ export interface ProductState {
     image: string;
 }
 
-const defaultState: ProductState[] = [{
-    id: 1,
-    name: "cheese",
-    price: 10,
-    quantity: 5,
-    image: "cheese.png",
-}, {
-    id: 2,
-    name: "Milk",
-    price: 5,
-    quantity: 5,
-    image: "milk.png",
-}]
+const defaultState: ProductState[] = []
 
 export function productReducer(state = defaultState, action: ProductAction):ProductState[] {
     if (action.type === 'ADD_TO_CART') {
-        const itemInCart = state.find((item) => item.id === action.payload.id)
+        const itemInCart = state.filter((item) => item.id === action.payload.id)[0]
         if (itemInCart) {
-            itemInCart.quantity ++;
-            return state
+            itemInCart!.quantity ++; 
+            // localStorage.setItem('cart', JSON.stringify([...state]))
+            return [...state];
         } else {
+            // localStorage.setItem('cart', JSON.stringify([...state, {...action.payload, quantity: 1}]))
              return [...state, {...action.payload, quantity: 1}]
         }
     } else
     if (action.type === 'INCREMENT_QUANTITY') {
-        const item = state.find((item) => item.id === action.payload);
+        const item = state.filter((item) => item.id === action.payload)[0];
             item!.quantity ++;
-            return [...state, item!]
+            return [...state]
         
     } else
     if (action.type === 'DECREMENT_QUANTITY') {
-        const item = state.find((item) => item.id === action.payload);
+        const item = state.filter((item) => item.id === action.payload)[0];
         if (item!.quantity === 1) {
             state.filter((item) => item.id !== action.payload)
-            return state
+            return [...state]
         } else {
             item!.quantity--;
-            return [...state, item!]
+            return [...state]
         }
     } else
     if (action.type === 'DELETE_PRODUCT_IN_CART') {
         const itemIndex = state.findIndex((item) => item.id === action.payload);
         state.splice(itemIndex, 1);
-        return state
+        // localStorage.setItem('cart', JSON.stringify([...state]))
+        return [...state]
     } else {
         return state
     }

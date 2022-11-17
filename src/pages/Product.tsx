@@ -7,26 +7,29 @@ import { addProductToCart, deleteProductInCart } from "../redux/action";
 import { NavLink, Outlet } from "react-router-dom";
 import { Products } from "../utils/model";
 import { RootState } from "../store";
+import { ProductState } from "../redux/reducer";
 
-export default function Product() {
+export default function Product(
+  // props: {onChange: () => void}
+) {
   const dispatch = useDispatch();
   const [product, setProduct] = useState<Products[]>([]);
 
   const productsInCartArray = useSelector((state: RootState) => state.product);
-  
+  // const productsInCartArray:ProductState[] = JSON.parse(localStorage.getItem("cart")!);
 
   useEffect(() => {
     const data = productsData();
     setProduct(data);
   }, [setProduct]);
 
-  // const addProduct = () => {
-  //   dispatch(addProductToCart(product));
-  // };
+  const addProduct = (product: Products) => {
+    dispatch(addProductToCart(product));
+  };
 
-  // const deleteProduct = () => {
-  //   dispatch(deleteProductInCart(product.id));
-  // };
+  const deleteProduct = (productId: number) => {
+    dispatch(deleteProductInCart(productId));
+  };
 
   return (
     <Outside>
@@ -44,12 +47,17 @@ export default function Product() {
                 />
               </NavLink>
 
-              {productsInCartArray.find((item) => item.id == product.id) && 
-              <div className="product-quantity-container">
-                <div className="product-quantity">{productsInCartArray.find((item) => item.id == product.id)?.quantity}</div>
-              </div>
-              }
-
+              {productsInCartArray.find((item) => item.id == product.id) && (
+                <div className="product-quantity-container">
+                  <div className="product-quantity">
+                    {
+                      productsInCartArray.filter(
+                        (item) => item.id == product.id
+                      )[0].quantity
+                    }
+                  </div>
+                </div>
+              )}
             </div>
             <div className="product-info">
               <h3>{product.name}</h3>
@@ -57,14 +65,23 @@ export default function Product() {
             </div>
 
             <div className="product-checkout">
-              { productsInCartArray.find((item) => item.id == product.id) && 
+              {productsInCartArray.find((item) => item.id == product.id) && (
                 <div>
-                  <button className="btn btn-out product-delete">x</button>
+                  <button
+                    className="btn btn-out product-delete"
+                    onClick={function() {deleteProduct(product.id); 
+                      // props.onChange()
+                    }}
+                  >
+                    x
+                  </button>
                 </div>
-              }
+              )}
               <AddCartButton
                 className="btn btn-outline"
-                //  onClick={addProduct}
+                onClick={function() {addProduct(product); 
+                  // props.onChange()
+                }}
               >
                 ${product.price}
               </AddCartButton>

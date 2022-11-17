@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, NavLink, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {
   Logo,
   LinkDiv,
@@ -18,16 +18,20 @@ import ProductNutrition from "./pages/ProductNutrition";
 import ProductStorage from "./pages/ProductStorage";
 import NotFound from "./pages/NotFound";
 import { useSelector } from "react-redux";
-import { ProductState } from "./redux/reducer";
 import { RootState } from "./store";
-import productsData from "./data";
 
 function App() {
   const numberOfItemsInCart = useSelector((state:RootState) => state.product.length);
-  const params = useParams<{ id: string }>();
-  let id = parseInt(params.id!);
-  const data = productsData();
+  // const [cart, setCart] = useState<number>(0);
+  
+  // const numberOfItemsInCart = JSON.parse(localStorage.getItem("cart")!).length === null ? 0 : JSON.parse(localStorage.getItem("cart")!).length;
 
+  // function updateCart() {
+  //   setCart(numberOfItemsInCart);
+  //   console.log(numberOfItemsInCart);
+    
+  // }
+  
   return (
     <>
       <GlobalStyle />
@@ -53,7 +57,9 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="about" element={<AboutUs />} />
-        <Route path="product" element={<Product />} />
+        <Route path="product" element={<Product 
+        // onChange={() => updateCart()}
+        />} />
           <Route path="product/:id" element={<ProductDetails />} >
             <Route path="nutrition" element={<ProductNutrition />} />
             <Route path="storage" element={<ProductStorage />} />

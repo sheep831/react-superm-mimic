@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "../css/Cart";
 import { ProductButton } from "../css/HomeStyle";
@@ -6,13 +6,28 @@ import { ProductState } from "../redux/reducer";
 import { RootState } from "../store";
 
 export default function Cart() {
-  const empty = false;
-
+  // const [empty, setEmpty] = useState<Boolean>(true);
   const productsArray = useSelector((state: RootState) => state.product);
+  // const productsArray:ProductState[] = JSON.parse(localStorage.getItem("cart")!);
+
+  let empty = true
+
+  if (productsArray.length > 0) {
+    empty = false
+  }
+
+  // useEffect(() => {
+  //   console.log(productsArray);
+    
+  //   if (productsArray.length === 0) {
+  //     return setEmpty(false);
+  //   }
+  // },[])
 
   const totalPrice = productsArray
     .map((product) => product.price * product.quantity)
     .reduce((a, b) => a + b, 0);
+    
 
   return (
     <Container>
