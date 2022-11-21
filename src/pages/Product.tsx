@@ -28,6 +28,8 @@ export default function Product(
   };
 
   const deleteProduct = (productId: number) => {
+    console.log(productId);
+    
     dispatch(deleteProductInCart(productId));
   };
 

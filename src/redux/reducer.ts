@@ -8,17 +8,17 @@ export interface ProductState {
     image: string;
 }
 
-const defaultState: ProductState[] = []
+const defaultState: ProductState[] = JSON.parse(localStorage.getItem("cart") || "[]");
 
 export function productReducer(state = defaultState, action: ProductAction):ProductState[] {
     if (action.type === 'ADD_TO_CART') {
         const itemInCart = state.filter((item) => item.id === action.payload.id)[0]
         if (itemInCart) {
             itemInCart!.quantity ++; 
-            // localStorage.setItem('cart', JSON.stringify([...state]))
+            localStorage.setItem('cart', JSON.stringify([...state]))
             return [...state];
         } else {
-            // localStorage.setItem('cart', JSON.stringify([...state, {...action.payload, quantity: 1}]))
+            localStorage.setItem('cart', JSON.stringify([...state, {...action.payload, quantity: 1}]))
              return [...state, {...action.payload, quantity: 1}]
         }
     } else
@@ -41,7 +41,7 @@ export function productReducer(state = defaultState, action: ProductAction):Prod
     if (action.type === 'DELETE_PRODUCT_IN_CART') {
         const itemIndex = state.findIndex((item) => item.id === action.payload);
         state.splice(itemIndex, 1);
-        // localStorage.setItem('cart', JSON.stringify([...state]))
+        localStorage.setItem('cart', JSON.stringify([...state]))
         return [...state]
     } else {
         return state

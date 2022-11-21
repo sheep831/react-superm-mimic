@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Container, Layout, ProductButton } from "../css/HomeStyle";
 import home from "../img/home.jpg";
 
 export default function Home() {
+  useEffect(() => {
+    (async function () {
+      const res = await fetch(
+        `https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=flw&lang=tc`
+      );
+
+      const result = await res.json();
+
+      console.log(result);
+    })();
+  }, []);
+
   return (
     <Container>
       <div className="grid">

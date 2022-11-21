@@ -16,18 +16,9 @@ export default function Cart() {
     empty = false
   }
 
-  // useEffect(() => {
-  //   console.log(productsArray);
-    
-  //   if (productsArray.length === 0) {
-  //     return setEmpty(false);
-  //   }
-  // },[])
-
   const totalPrice = productsArray
     .map((product) => product.price * product.quantity)
     .reduce((a, b) => a + b, 0);
-    
 
   return (
     <Container>
@@ -47,9 +38,8 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-              {productsArray.map((item: ProductState) => (
-                <>
-                  
+                {productsArray.map((item: ProductState) => (
+                  <>
                     <tr>
                       <td>
                         <img
@@ -65,9 +55,9 @@ export default function Cart() {
                       <td>{item.quantity}</td>
                       <td>${item.quantity * item.price}</td>
                     </tr>
-                </>
-              ))}
-  </tbody>
+                  </>
+                ))}
+              </tbody>
               <tfoot>
                 <tr>
                   <th colSpan={2}></th>

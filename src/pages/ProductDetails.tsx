@@ -10,7 +10,7 @@ export default function ProductDetails() {
   let id = parseInt(params.id!);
   const data = productsData();
   const product = data.find((product) => product.id == id);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
 
   function closeDetails() {
     setShowDetails(false);

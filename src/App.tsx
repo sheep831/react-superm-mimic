@@ -24,8 +24,6 @@ function App() {
   const numberOfItemsInCart = useSelector((state:RootState) => state.product.length);
   // const [cart, setCart] = useState<number>(0);
   
-  // const numberOfItemsInCart = JSON.parse(localStorage.getItem("cart")!).length === null ? 0 : JSON.parse(localStorage.getItem("cart")!).length;
-
   // function updateCart() {
   //   setCart(numberOfItemsInCart);
   //   console.log(numberOfItemsInCart);
