@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddCartButton, Outside } from "../css/ProductList";
 import productsData from "../data";
 import { addProductToCart, deleteProductInCart } from "../redux/action";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Products } from "../utils/model";
 import { RootState } from "../store";
 import { ProductState } from "../redux/reducer";
 
-export default function Product(
-  // props: {onChange: () => void}
-) {
+export default function Product() {
+// props: {onChange: () => void}
   const dispatch = useDispatch();
   const [product, setProduct] = useState<Products[]>([]);
 
@@ -47,12 +46,12 @@ export default function Product(
                 />
               </NavLink>
 
-              {productsInCartArray.find((item) => item.id == product.id) && (
+              {productsInCartArray.find((item) => item.id === product.id) && (
                 <div className="product-quantity-container">
                   <div className="product-quantity">
                     {
                       productsInCartArray.filter(
-                        (item) => item.id == product.id
+                        (item) => item.id === product.id
                       )[0].quantity
                     }
                   </div>
@@ -65,11 +64,12 @@ export default function Product(
             </div>
 
             <div className="product-checkout">
-              {productsInCartArray.find((item) => item.id == product.id) && (
+              {productsInCartArray.find((item) => item.id === product.id) && (
                 <div>
                   <button
                     className="btn btn-out product-delete"
-                    onClick={function() {deleteProduct(product.id); 
+                    onClick={() => {
+                      deleteProduct(product.id);
                       // props.onChange()
                     }}
                   >
@@ -79,7 +79,8 @@ export default function Product(
               )}
               <AddCartButton
                 className="btn btn-outline"
-                onClick={function() {addProduct({...product, quantity: 1}); 
+                onClick={() => {
+                  addProduct({ ...product, quantity: 1 });
                   // props.onChange()
                 }}
               >
