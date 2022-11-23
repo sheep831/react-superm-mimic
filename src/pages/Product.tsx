@@ -23,13 +23,11 @@ export default function Product(
     setProduct(data);
   }, [setProduct]);
 
-  const addProduct = (product: Products) => {
+  const addProduct = (product: ProductState) => {
     dispatch(addProductToCart(product));
   };
 
   const deleteProduct = (productId: number) => {
-    console.log(productId);
-    
     dispatch(deleteProductInCart(productId));
   };
 
@@ -81,7 +79,7 @@ export default function Product(
               )}
               <AddCartButton
                 className="btn btn-outline"
-                onClick={function() {addProduct(product); 
+                onClick={function() {addProduct({...product, quantity: 1}); 
                   // props.onChange()
                 }}
               >

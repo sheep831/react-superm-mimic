@@ -9,7 +9,7 @@ export default function ProductRealDetails(props: {product: Products}) {
   const dispatch = useDispatch();
   
   const addProduct = (product: Products) => {
-    dispatch(addProductToCart(product));
+    dispatch(addProductToCart({...product, quantity: 1}));
   };
 
   return (

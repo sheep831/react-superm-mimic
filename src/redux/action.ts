@@ -1,6 +1,7 @@
 import { Products } from "../utils/model";
+import { ProductState } from "./reducer";
 
-export function addProductToCart(product: Products) {
+export function addProductToCart(product: ProductState) {
   return {
     type: "ADD_TO_CART" as const,
     payload: product,
